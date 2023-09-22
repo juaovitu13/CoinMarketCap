@@ -1,5 +1,5 @@
 /* Reset de estilos para garantir uma base limpa */
-/* Reset de estilos para garantir uma base limpa */
+
 body, h1, h2, h3, p, ol, ul {
     margin: 0;
     padding: 0;
@@ -46,27 +46,12 @@ header {
     border-radius: 50%; /* Arredondamos a imagem */
 }
 
-/* Estilo para breadcrumb */
-.breadcrumb {
-    background-color: transparent;
-    margin: 0;
-    padding: 0;
-}
-
-.breadcrumb-item {
-    color: #333;
-    font-weight: bold;
-}
-
-.breadcrumb-item.active {
-    color: #555;
-}
-
 /* Estilizando a lista de criptomoedas */
 .crypto-list {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start; /* Mostrar em uma linha e ir para a próxima linha quando necessário */
+    justify-content: center; /* Centralizar horizontalmente */
+    align-items: flex-start; /* Alinhar no início verticalmente */
 }
 
 .crypto-item {
