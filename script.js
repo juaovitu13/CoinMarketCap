@@ -1,7 +1,6 @@
-// script.js
 // Chave da API
 var apikey = {
-    key: 'SUA API KEY AQUI:)'
+    key: '30b8a4a1-7e0d-4711-8aa3-e99cfaed399d'
 };
 
 // Função para formatar o preço das moedas
