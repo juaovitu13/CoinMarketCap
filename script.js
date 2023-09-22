@@ -8,32 +8,36 @@ function formatPrice(price) {
     return parseFloat(price).toFixed(2);
 }
 
-// GET Fetch Requisition
-fetch('https://pro-api.coinmarketcap.com/v1/cryptocurrency/map?CMC_PRO_API_KEY=' + apikey.key)
-    .then((response) => {
-        if (!response.ok) throw new Error('Erro ao executar a requisição, status ' + response.status);
-        return response.json();
-    })
-    .then((api) => {
+function fetchCryptocurrencyData() {
+    fetch('https://pro-api.coinmarketcap.com/v1/cryptocurrency/map?CMC_PRO_API_KEY=' + apikey.key)
+        .then((response) => {
+            if (!response.ok) throw new Error('Erro ao executar a requisição, status ' + response.status);
+            return response.json();
+        })
+        .then((api) => {
+            var cryptoList = document.getElementById("crypto-list");
 
-        var coins = "";
-        // Obtenha 10 moedas e símbolos
-        for (let i = 0; i < 10; i++) {
-            // Mostrar informações da API
-            coins += `
-                <div class="media">
-                    <img src="coin.jpg" class="align-self-center mr-3" alt="coin" width="100" height="60">
-                    <div class="media-body">
-                        <h5 class="mt-2">${api.data[i].name}</h5>
-                        <p>${api.data[i].symbol}</p>
+            api.data.forEach((crypto) => {
+                var cryptoItem = document.createElement("div");
+                cryptoItem.classList.add("crypto-item");
+
+                cryptoItem.innerHTML = `
+                    <div class="crypto-info">
+                        <h2>${crypto.name} (${crypto.symbol})</h2>
+                        <p>ID: ${crypto.id}</p>
+                        <p>Rank: ${crypto.rank}</p>
+                        <p>Ativo: ${crypto.is_active ? "Sim" : "Não"}</p>
+                        <p>Primeira Dados Históricos: ${crypto.first_historical_data}</p>
+                        <p>Últimos Dados Históricos: ${crypto.last_historical_data}</p>
                     </div>
-                </div>
-            `;
-        }
+                `;
 
-        document.getElementById("coins").innerHTML = coins;
+                cryptoList.appendChild(cryptoItem);
+            });
+        })
+        .catch((error) => {
+            console.error(error.message);
+        });
+}
 
-    })
-    .catch((error) => {
-        console.error(error.message);
-    });
+fetchCryptocurrencyData();
